@@ -1,23 +1,28 @@
 "use client";
 
 import clsx from "clsx";
+import { useEffect, useState } from "react";
 
 const Header = () => {
+  const [theme, setTheme] = useState("dark");
+
+  useEffect(() => {
+    document.documentElement.setAttribute("data-theme", theme);
+  }, [theme]);
+
+  const toggleTheme = () => {
+    theme === "dark" ? setTheme("light") : setTheme("dark");
+  };
+
   return (
-    <h1
+    <button
       className={clsx(
-        "text-6xl",
-        "font-bold",
-        "text-blue-500",
-        "hover:text-blue-50",
-        "hover:bg-blue-500",
-        "transition",
-        "duration-1000"
+        "bg-amber-100 rounded-2xl text-slate-900 p-3 mb-2 cursor-pointer hover:bg-amber-300 transition ease-in duration-300"
       )}
-      onClick={() => alert(123)}
+      onClick={toggleTheme}
     >
-      Header component
-    </h1>
+      Toggle Theme
+    </button>
   );
 };
 
