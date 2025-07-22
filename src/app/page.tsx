@@ -1,11 +1,10 @@
 import Container from "@/components/Container";
 import Header from "@/components/Header";
 import PostHeading from "@/components/PostHeading";
+import PostImageCover from "@/components/PostImageCover";
 import PostsList from "@/components/PostsList";
 import SpinLoader from "@/components/SpinLoader";
 import clsx from "clsx";
-import Image from "next/image";
-import Link from "next/link";
 import { Suspense } from "react";
 
 export default async function Home() {
@@ -16,23 +15,19 @@ export default async function Home() {
       <section
         className={clsx("grid grid-cols-1 gap-8 mb-16 group", "sm:grid-cols-2")}
       >
-        <Link
-          className={clsx(
-            "w-full h-full overflow-hidden transition rounded-xl"
-          )}
-          href={"#"}
-        >
-          <Image
-            className={clsx(
-              "group-hover:scale-105 w-full h-full object-cover object-center"
-            )}
-            src={"/images/bryen_0.png"}
-            alt="Post title"
-            width={1200}
-            height={720}
-            priority
-          />
-        </Link>
+        <PostImageCover
+          imageProps={{
+            src: "/images/bryen_0.png",
+            alt: "Post title",
+            width: 1200,
+            height: 720,
+            priority: true,
+          }}
+          linkProps={{
+            href: "#",
+            className: "",
+          }}
+        />
         <div className={clsx("flex flex-col gap-4", "sm:justify-center")}>
           <time
             className={clsx("text-sm/tight text-slate-600")}
