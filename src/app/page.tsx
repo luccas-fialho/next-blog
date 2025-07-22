@@ -8,10 +8,6 @@ import { Suspense } from "react";
 export default async function Home() {
   return (
     <Container>
-      <header className={clsx("text-6xl font-bold text-center py-8")}>
-        <h1>Header</h1>
-      </header>
-
       <Header />
 
       <Suspense fallback={<SpinLoader />}>
