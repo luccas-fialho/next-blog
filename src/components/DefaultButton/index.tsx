@@ -1,9 +1,11 @@
 "use client";
 
+import clsx from "clsx";
+import { MoonIcon, SunIcon } from "lucide-react";
 import { useEffect, useState } from "react";
 
 type DefaultButtonProps = {
-  children: React.ReactNode;
+  children?: React.ReactNode;
   toggleTheme?: boolean;
 } & React.ComponentProps<"button">;
 
@@ -27,7 +29,11 @@ const DefaultButton = ({
     <>
       {toggleTheme ? (
         <button onClick={handleToggleTheme} {...rest}>
-          {children}
+          {theme === "dark" ? (
+            <SunIcon className={clsx("text-slate-100")} />
+          ) : (
+            <MoonIcon />
+          )}
         </button>
       ) : (
         <button {...rest}>{children}</button>
