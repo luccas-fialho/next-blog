@@ -36,7 +36,7 @@ export default async function Home() {
             22/07/2025 10:00
           </time>
 
-          <PostHeading url="#">
+          <PostHeading as="h1" url="#">
             Lorem ipsum dolor sit amet consectetur
           </PostHeading>
 

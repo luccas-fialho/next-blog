@@ -9,11 +9,11 @@ type PostHeadingProps = {
 
 const PostHeading = ({ children, as: Tag = "h2", url }: PostHeadingProps) => {
   const headingClassesMap = {
-    h1: "text-3xl/tight sm:text-4xl",
-    h2: "text-2xl/tight sm:text-4xl",
+    h1: "text-3xl/tight sm:text-4xl font-extrabold",
+    h2: "text-2xl/tight font-bold",
   };
 
-  const commonClasses = "font-extrabold";
+  const commonClasses = "hover:text-slate-400 transition";
 
   return (
     <Tag className={clsx(headingClassesMap[Tag], commonClasses)}>
