@@ -2,6 +2,10 @@ import { postRepository } from "@/repository/posts";
 import PostImageCover from "../PostImageCover";
 import clsx from "clsx";
 import PostHeading from "../PostHeading";
+import {
+  formatDatetime,
+  formatRelativeDatetime,
+} from "@/utils/format-datetime";
 
 const PostsList = async () => {
   const posts = await postRepository.findAll();
@@ -32,8 +36,9 @@ const PostsList = async () => {
               <time
                 className={clsx("text-sm/tight text-slate-600")}
                 dateTime={post.createdAt}
+                title={formatRelativeDatetime(post.createdAt)}
               >
-                {post.createdAt}
+                {formatDatetime(post.createdAt)}
               </time>
 
               <PostHeading as="h2" url={`/posts/${post.slug}`}>
