@@ -4,7 +4,7 @@ import PostSummary from "../PostSummary";
 import clsx from "clsx";
 
 const PostsList = async () => {
-  const posts = await postRepository.findAll();
+  const posts = await postRepository.findAllPublic();
   return (
     <div
       className={clsx(
