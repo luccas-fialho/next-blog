@@ -8,7 +8,7 @@ const PostsList = async () => {
   return (
     <div
       className={clsx(
-        "grid grid-cols-1 gap-4",
+        "grid grid-cols-1 gap-4 mb-16",
         "sm:grid-cols-2",
         "lg:grid-cols-3"
       )}
