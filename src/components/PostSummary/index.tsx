@@ -23,7 +23,7 @@ const PostSummary = ({ post, postHeading }: PostSummaryProps) => {
         {formatDatetime(post.createdAt)}
       </time>
 
-      <PostHeading as={postHeading} url={`/posts/${post.slug}`}>
+      <PostHeading as={postHeading} url={`/post/${post.slug}`}>
         {post.title}
       </PostHeading>
 

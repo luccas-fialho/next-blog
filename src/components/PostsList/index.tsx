@@ -24,7 +24,7 @@ const PostsList = async () => {
                 height: 720,
               }}
               linkProps={{
-                href: `/posts/${post.slug}`,
+                href: `/post/${post.slug}`,
                 className: "",
               }}
             />

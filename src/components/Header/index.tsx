@@ -20,7 +20,7 @@ const Header = () => {
           "lg:text-7xl/normal "
         )}
       >
-        <Link href="#">The blog</Link>
+        <Link href="/">The blog</Link>
       </h1>
 
       <DefaultButton
