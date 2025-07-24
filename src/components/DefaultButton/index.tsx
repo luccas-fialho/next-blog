@@ -9,21 +9,35 @@ type DefaultButtonProps = {
   toggleTheme?: boolean;
 } & React.ComponentProps<"button">;
 
+type AvailableThemes = "dark" | "light";
+
 const DefaultButton = ({
   children,
   toggleTheme,
   ...rest
 }: DefaultButtonProps) => {
-  const [theme, setTheme] = useState("dark");
+  const [theme, setTheme] = useState<AvailableThemes>("dark");
+  const [isReady, setIsReady] = useState(false);
 
   useEffect(() => {
+    const savedTheme = localStorage.getItem("theme");
+    if (savedTheme === "light" || savedTheme === "dark") {
+      setTheme(savedTheme);
+    }
+    setIsReady(true);
+  }, []);
+
+  useEffect(() => {
+    if (!isReady) return;
     document.documentElement.setAttribute("data-theme", theme);
-  }, [theme]);
+    localStorage.setItem("theme", theme);
+  }, [theme, isReady]);
 
   const handleToggleTheme = () => {
-    if (theme === "dark") setTheme("light");
-    else setTheme("dark");
+    setTheme((prev) => (prev === "dark" ? "light" : "dark"));
   };
+
+  if (!isReady) return null;
 
   return (
     <>
