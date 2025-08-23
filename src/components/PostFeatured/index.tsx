@@ -4,7 +4,7 @@ import PostSummary from "../PostSummary";
 import { findAllPublicPostsCached } from "@/lib/post/queries";
 import { PostModel } from "@/models/post/post-model";
 
-const PostFeatured = async () => {
+export const PostFeatured = async () => {
   const posts: PostModel[] = await findAllPublicPostsCached();
   const post = posts[0];
   const postLink = `/post/${post.slug}`;
@@ -30,5 +30,3 @@ const PostFeatured = async () => {
     </section>
   );
 };
-
-export default PostFeatured;

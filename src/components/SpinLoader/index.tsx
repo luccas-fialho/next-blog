@@ -5,7 +5,7 @@ type SpinLoaderProps = {
   containerClasses?: string;
 };
 
-const SpinLoader = ({ containerClasses }: SpinLoaderProps) => {
+export const SpinLoader = ({ containerClasses }: SpinLoaderProps) => {
   return (
     <div
       className={clsx(
@@ -26,5 +26,3 @@ const SpinLoader = ({ containerClasses }: SpinLoaderProps) => {
     </div>
   );
 };
-
-export default SpinLoader;

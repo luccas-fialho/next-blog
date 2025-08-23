@@ -3,7 +3,7 @@ import PostSummary from "../PostSummary";
 import clsx from "clsx";
 import { findAllPublicPostsCached } from "@/lib/post/queries";
 
-const PostsList = async () => {
+export const PostsList = async () => {
   const posts = await findAllPublicPostsCached();
   return (
     <div
@@ -35,5 +35,3 @@ const PostsList = async () => {
     </div>
   );
 };
-
-export default PostsList;
