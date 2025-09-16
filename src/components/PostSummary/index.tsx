@@ -2,10 +2,7 @@ import clsx from "clsx";
 import React from "react";
 import PostHeading from "../PostHeading";
 import { PostModelDTO } from "@/models/post/post-model-DTO";
-import {
-  formatDatetime,
-  formatRelativeDatetime,
-} from "@/utils/format-datetime";
+import PostDate from "../PostDate";
 
 type PostSummaryProps = {
   postHeading?: "h1" | "h2";
@@ -15,13 +12,7 @@ type PostSummaryProps = {
 const PostSummary = ({ post, postHeading }: PostSummaryProps) => {
   return (
     <div className={clsx("flex flex-col gap-4", "sm:justify-center")}>
-      <time
-        className={clsx("text-sm/tight text-slate-600")}
-        dateTime={post.createdAt}
-        title={formatRelativeDatetime(post.createdAt)}
-      >
-        {formatDatetime(post.createdAt)}
-      </time>
+      <PostDate createdAt={post.createdAt} />
 
       <PostHeading as={postHeading} url={`/post/${post.slug}`}>
         {post.title}
