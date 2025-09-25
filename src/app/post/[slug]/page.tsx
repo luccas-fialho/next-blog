@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 import { Suspense } from "react";
-import { findPostBySlugCached } from "@/lib/post/queries";
+import { findPostBySlugCached } from "@/lib/post/queries/public";
 import { SpinLoader } from "@/components/SpinLoader";
 import { SinglePost } from "@/components/SinglePost";
 

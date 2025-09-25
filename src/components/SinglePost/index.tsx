@@ -1,4 +1,4 @@
-import { findPostBySlugCached } from "@/lib/post/queries";
+import { findPostBySlugCached } from "@/lib/post/queries/public";
 import Image from "next/image";
 import PostDate from "../PostDate";
 import SafeMarkdown from "../SafeMarkdown";
