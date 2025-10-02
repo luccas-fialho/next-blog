@@ -1,0 +1,1 @@
+export const LOADING_TIME_IN_MS = 2000;
