@@ -3,9 +3,16 @@ import PostImageCover from "../PostImageCover";
 import PostSummary from "../PostSummary";
 import { findAllPublicPostsCached } from "@/lib/post/queries/public";
 import { PostModel } from "@/models/post/post-model";
+import ErrorMessage from "../ErrorMessage";
 
 export const PostFeatured = async () => {
   const posts: PostModel[] = await findAllPublicPostsCached();
+
+  if (posts.length <= 0)
+    return (
+      <ErrorMessage contentTitle="Ops! 😅" content="No posts created yet!" />
+    );
+
   const post = posts[0];
   const postLink = `/post/${post.slug}`;
 

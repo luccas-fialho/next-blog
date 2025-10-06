@@ -22,8 +22,11 @@ const DeletePostButton = ({ id, title }: DeletePostButtonProps) => {
   const handleConfirm = () => {
     startTransition(async () => {
       const result = await deletePostAction(id);
-      alert(`The result is: ${result}`);
       setShowDialog(false);
+
+      if (result.error) {
+        alert(`Error: ${result.error}`);
+      }
     });
   };
 

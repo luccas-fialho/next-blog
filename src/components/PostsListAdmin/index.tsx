@@ -2,9 +2,15 @@ import { findAllPostAdmin } from "@/lib/post/queries/admin";
 import clsx from "clsx";
 import Link from "next/link";
 import DeletePostButton from "../Admin/DeletePostButton";
+import ErrorMessage from "../ErrorMessage";
 
 const PostsListAdmin = async () => {
   const posts = await findAllPostAdmin();
+
+  if (posts.length <= 0)
+    return (
+      <ErrorMessage contentTitle="Hey 😅" content="Let's create a post?" />
+    );
 
   return (
     <div className="mb-16">
@@ -14,7 +20,7 @@ const PostsListAdmin = async () => {
             className={clsx(
               "p-2",
               !post.published && "bg-slate-300 dark:text-slate-600",
-              "flex gap-2 items-center justify-between",
+              "flex gap-2 items-center justify-between"
             )}
             key={post.id}
           >
