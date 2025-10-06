@@ -19,6 +19,12 @@ const Dialog = ({
   disabled,
 }: DialogProps) => {
   if (!isVisible) return null;
+
+  const handleCancel = () => {
+    if (disabled) return;
+    onCancel();
+  };
+
   return (
     <div
       className={clsx(
@@ -28,7 +34,7 @@ const Dialog = ({
         "bg-black/50",
         "flex items-center justify-center"
       )}
-      onClick={onCancel}
+      onClick={handleCancel}
     >
       <div
         className={clsx(
@@ -37,7 +43,8 @@ const Dialog = ({
           "flex flex-col gap-6",
           "p-6",
           "rounded-lg",
-          "shadow-lg shadow-black/30 text-center"
+          "shadow-lg shadow-black/30 text-center",
+          "dark:bg-slate-800 dark:text-slate-200",
         )}
         role="dialog"
         aria-modal="true"
@@ -61,7 +68,7 @@ const Dialog = ({
               "disabled:bg-slate-300 disabled:text-slate-400 disabled:cursor-not-allowed"
             )}
             autoFocus
-            onClick={onCancel}
+            onClick={handleCancel}
             disabled={disabled}
           >
             Cancel
