@@ -5,6 +5,7 @@ import { Trash2Icon } from "lucide-react";
 import clsx from "clsx";
 import { useState, useTransition } from "react";
 import Dialog from "@/components/Dialog";
+import { toast } from "react-toastify";
 
 type DeletePostButtonProps = {
   id: string;
@@ -20,13 +21,18 @@ const DeletePostButton = ({ id, title }: DeletePostButtonProps) => {
   };
 
   const handleConfirm = () => {
+    toast.dismiss();
+
     startTransition(async () => {
       const result = await deletePostAction(id);
       setShowDialog(false);
 
       if (result.error) {
-        alert(`Error: ${result.error}`);
+        toast.error(result.error);
+        return;
       }
+
+      toast.success(`Post "${title}" deleted successfully.`);
     });
   };
 
