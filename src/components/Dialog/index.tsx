@@ -1,5 +1,6 @@
 "use client";
 import clsx from "clsx";
+import Button from "../Button";
 
 type DialogProps = {
   isVisible?: boolean;
@@ -57,37 +58,21 @@ const Dialog = ({
         </h3>
         <div id="dialog-description">{content}</div>
         <div className="flex items-center justify-around">
-          <button
-            className={clsx(
-              "bg-slate-300",
-              "hover:bg-slate-400",
-              "transition",
-              "text-slate-950",
-              "flex items-center justify-center",
-              "py-2 px-4 rounded-lg cursor-pointer",
-              "disabled:bg-slate-300 disabled:text-slate-400 disabled:cursor-not-allowed"
-            )}
+          <Button
             autoFocus
             onClick={handleCancel}
             disabled={disabled}
+            variant="ghost"
           >
             Cancel
-          </button>
-          <button
-            className={clsx(
-              "bg-blue-500",
-              "hover:bg-blue-600",
-              "transition",
-              "text-blue-50",
-              "flex items-center justify-center",
-              "py-2 px-4 rounded-lg cursor-pointer",
-              "disabled:bg-slate-300 disabled:text-slate-400 disabled:cursor-not-allowed"
-            )}
+          </Button>
+          <Button
             onClick={onConfirm}
             disabled={disabled}
+            variant="default"
           >
             Confirm
-          </button>
+          </Button>
         </div>
       </div>
     </div>
