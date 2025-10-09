@@ -1,52 +1,45 @@
-import Button from "@/components/Button";
-import { BanIcon, BugIcon, CheckIcon } from "lucide-react";
+import InputText from "@/components/InputText";
 
 export const dynamic = "force-dynamic";
 
 const AdminNewPostPage = async () => {
   return (
-    <div>
-      <div className="py-16 flex gap-4 flex-wrap items-center">
-        <Button variant="default" size="sm">
-          <BugIcon />
-          Confirm
-        </Button>
-        <Button variant="ghost" size="md">
-          <BugIcon />
-          Confirm
-        </Button>
-        <Button variant="danger" size="lg">
-          <BugIcon />
-          Confirm
-        </Button>
+    <div className="flex flex-col gap-6">
+      <div>
+        <InputText placeholder="Type your name" labelText="Name" />
       </div>
-
-      <div className="py-16 flex gap-4 flex-wrap items-center">
-        <Button variant="default" size="sm" disabled>
-          <BugIcon />
-          Confirm
-        </Button>
-        <Button variant="ghost" size="md" disabled>
-          <BugIcon />
-          Confirm
-        </Button>
-        <Button variant="danger" size="lg" disabled>
-          <BugIcon />
-          Confirm
-        </Button>
-
-        <Button variant="danger" size="sm" className="w-full">
-          <BugIcon />
-          Confirm
-        </Button>
-        <Button variant="ghost" size="md" className="w-full">
-          <BanIcon />
-          Cancel
-        </Button>
-        <Button variant="default" size="lg" className="w-full">
-          <CheckIcon />
-          OK
-        </Button>
+      <div>
+        <InputText placeholder="Type your last name" labelText="Last Name" />
+      </div>
+      <div>
+        <InputText
+          disabled
+          placeholder="Type your last name"
+          labelText="Last Name"
+          defaultValue={"xdxdxds"}
+        />
+      </div>
+      <div>
+        <InputText
+          disabled
+          placeholder="Type your last name"
+          labelText="Last Name"
+        />
+      </div>
+      <div>
+        <InputText
+          placeholder="Type your last name"
+          labelText="Last Name"
+          readOnly
+        />
+      </div>
+      <div>
+        <InputText
+          placeholder="Type your last name"
+          labelText="Last Name"
+          defaultValue={"hehee"}
+          readOnly
+        />
       </div>
     </div>
   );
