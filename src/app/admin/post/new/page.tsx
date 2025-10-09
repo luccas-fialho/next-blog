@@ -1,47 +1,53 @@
+import Button from "@/components/Button";
+import InputCheckbox from "@/components/InputCheckbox";
 import InputText from "@/components/InputText";
 
 export const dynamic = "force-dynamic";
 
 const AdminNewPostPage = async () => {
   return (
-    <div className="flex flex-col gap-6">
-      <div>
+    <form action="" className="mb-16">
+      <div className="flex flex-col gap-6">
         <InputText placeholder="Type your name" labelText="Name" />
-      </div>
-      <div>
+
         <InputText placeholder="Type your last name" labelText="Last Name" />
-      </div>
-      <div>
+
+        <InputCheckbox
+          placeholder="Type your last name"
+          labelText="Last Name"
+        />
+
         <InputText
           disabled
           placeholder="Type your last name"
           labelText="Last Name"
           defaultValue={"xdxdxds"}
         />
-      </div>
-      <div>
+
         <InputText
           disabled
           placeholder="Type your last name"
           labelText="Last Name"
         />
-      </div>
-      <div>
+
         <InputText
           placeholder="Type your last name"
           labelText="Last Name"
           readOnly
         />
-      </div>
-      <div>
+
         <InputText
           placeholder="Type your last name"
           labelText="Last Name"
           defaultValue={"hehee"}
           readOnly
         />
+
+        <div className="mt-6">
+          <Button type="submit">Submit</Button>
+        </div>
       </div>
-    </div>
+    </form>
   );
 };
 
