@@ -1,13 +1,15 @@
 "use client";
 
+import { uploadImageAction } from "@/actions/post/upload-image-action";
 import Button from "@/components/Button";
 import { IMAGE_UPLOAD_MAX_SIZE } from "@/lib/constants";
 import { UploadIcon } from "lucide-react";
-import { useRef } from "react";
+import { useRef, useTransition } from "react";
 import { toast } from "react-toastify";
 
 const ImageUploader = () => {
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const [isUploading, startTransition] = useTransition();
 
   const handleUploadImage = () => {
     if (!fileInputRef.current) return;
@@ -32,13 +34,23 @@ const ImageUploader = () => {
     formData.append("file", file);
 
     // TODO: upload the image to the server
+    startTransition(async () => {
+      const result = await uploadImageAction();
+      console.log(result);
+    });
+
     fileInput.value = "";
     toast.success("Image uploaded successfully (not really, this is a demo)");
   };
 
   return (
     <div className="flex flex-col gap-2">
-      <Button onClick={handleUploadImage} type="button" className="self-start">
+      <Button
+        onClick={handleUploadImage}
+        type="button"
+        className="self-start"
+        disabled={isUploading}
+      >
         <UploadIcon />
         Upload an image
       </Button>
