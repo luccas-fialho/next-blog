@@ -5,6 +5,7 @@ import Button from "../Button";
 import InputCheckbox from "../InputCheckbox";
 import MarkdownEditor from "../MarkdownEditor";
 import { useState } from "react";
+import ImageUploader from "../Admin/ImageUploader";
 
 const ManagePostForm = () => {
   const [content, setContent] = useState("");
@@ -12,6 +13,8 @@ const ManagePostForm = () => {
     <form action="" className="mb-16">
       <div className="flex flex-col gap-6">
         <InputText placeholder="Type your name" labelText="Name" />
+
+        <ImageUploader />
 
         <InputText placeholder="Type your last name" labelText="Last Name" />
 
