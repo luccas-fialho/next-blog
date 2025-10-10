@@ -1,1 +1,2 @@
 export const LOADING_TIME_IN_MS = 2000;
+export const IMAGE_UPLOAD_MAX_SIZE = 921600; // 900 * 1024 = 921600
