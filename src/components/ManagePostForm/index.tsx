@@ -1,11 +1,13 @@
 "use client";
 
-import InputText from '../InputText'
-import Button from '../Button'
-import InputCheckbox from '../InputCheckbox';
-
+import InputText from "../InputText";
+import Button from "../Button";
+import InputCheckbox from "../InputCheckbox";
+import MarkdownEditor from "../MarkdownEditor";
+import { useState } from "react";
 
 const ManagePostForm = () => {
+  const [content, setContent] = useState("");
   return (
     <form action="" className="mb-16">
       <div className="flex flex-col gap-6">
@@ -23,6 +25,14 @@ const ManagePostForm = () => {
           placeholder="Type your last name"
           labelText="Last Name"
           defaultValue={"xdxdxds"}
+        />
+
+        <MarkdownEditor
+          labelText="Content"
+          disabled={false}
+          textAreaName="content"
+          value={content}
+          setValue={setContent}
         />
 
         <InputText
@@ -49,7 +59,7 @@ const ManagePostForm = () => {
         </div>
       </div>
     </form>
-  )
-}
+  );
+};
 
-export default ManagePostForm
+export default ManagePostForm;
