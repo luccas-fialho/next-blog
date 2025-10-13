@@ -6,9 +6,15 @@ import InputCheckbox from "../InputCheckbox";
 import MarkdownEditor from "../MarkdownEditor";
 import { useState } from "react";
 import ImageUploader from "../Admin/ImageUploader";
+import { PostModelDTO } from "@/models/post/post-model-DTO";
 
-const ManagePostForm = () => {
-  const [content, setContent] = useState("");
+type ManagePostFormProps = {
+  post?: PostModelDTO;
+};
+
+const ManagePostForm = ({ post }: ManagePostFormProps) => {
+  const [content, setContent] = useState(post?.content || "");
+
   return (
     <form action="" className="mb-16">
       <div className="flex flex-col gap-6">
@@ -17,7 +23,7 @@ const ManagePostForm = () => {
           placeholder="ID generated automatically"
           labelText="ID"
           type="text"
-          defaultValue={""}
+          defaultValue={post?.id || ""}
           readOnly
         />
 
@@ -26,7 +32,7 @@ const ManagePostForm = () => {
           placeholder="Slug generated automatically"
           labelText="Slug"
           type="text"
-          defaultValue={""}
+          defaultValue={post?.slug || ""}
           readOnly
         />
 
@@ -35,7 +41,7 @@ const ManagePostForm = () => {
           placeholder="Johnny Test"
           labelText="Author"
           type="text"
-          defaultValue={""}
+          defaultValue={post?.author || ""}
         />
 
         <InputText
@@ -43,7 +49,7 @@ const ManagePostForm = () => {
           placeholder="My amazing title!"
           labelText="Title"
           type="text"
-          defaultValue={""}
+          defaultValue={post?.title || ""}
         />
 
         <InputText
@@ -51,7 +57,7 @@ const ManagePostForm = () => {
           placeholder="This is my amazing post description"
           labelText="Excerpt"
           type="text"
-          defaultValue={""}
+          defaultValue={post?.excerpt || ""}
         />
 
         <MarkdownEditor
@@ -69,13 +75,14 @@ const ManagePostForm = () => {
           placeholder="Type/paste image url"
           labelText="Cover post image"
           type="text"
-          defaultValue={""}
+          defaultValue={post?.coverImageUrl || ""}
         />
 
         <InputCheckbox
           name="coverImageUrl"
           labelText="Publish?"
           type="checkbox"
+          defaultChecked={post?.published || false}
         />
 
         <div className="mt-6">
