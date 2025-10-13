@@ -12,49 +12,70 @@ const ManagePostForm = () => {
   return (
     <form action="" className="mb-16">
       <div className="flex flex-col gap-6">
-        <InputText placeholder="Type your name" labelText="Name" />
-
-        <ImageUploader />
-
-        <InputText placeholder="Type your last name" labelText="Last Name" />
-
-        <InputCheckbox
-          placeholder="Type your last name"
-          labelText="Last Name"
+        <InputText
+          name="id"
+          placeholder="ID generated automatically"
+          labelText="ID"
+          type="text"
+          defaultValue={""}
+          readOnly
         />
 
         <InputText
-          disabled
-          placeholder="Type your last name"
-          labelText="Last Name"
-          defaultValue={"xdxdxds"}
+          name="slug"
+          placeholder="Slug generated automatically"
+          labelText="Slug"
+          type="text"
+          defaultValue={""}
+          readOnly
+        />
+
+        <InputText
+          name="author"
+          placeholder="Johnny Test"
+          labelText="Author"
+          type="text"
+          defaultValue={""}
+        />
+
+        <InputText
+          name="title"
+          placeholder="My amazing title!"
+          labelText="Title"
+          type="text"
+          defaultValue={""}
+        />
+
+        <InputText
+          name="excerpt"
+          placeholder="This is my amazing post description"
+          labelText="Excerpt"
+          type="text"
+          defaultValue={""}
         />
 
         <MarkdownEditor
           labelText="Content"
-          disabled={false}
-          textAreaName="content"
           value={content}
           setValue={setContent}
+          textAreaName="content"
+          disabled={false}
         />
 
-        <InputText
-          disabled
-          placeholder="Type your last name"
-          labelText="Last Name"
-        />
+        <ImageUploader />
 
         <InputText
-          placeholder="Type your last name"
-          labelText="Last Name"
-          readOnly
+          name="coverImageUrl"
+          placeholder="Type/paste image url"
+          labelText="Cover post image"
+          type="text"
+          defaultValue={""}
         />
 
-        <InputText
-          placeholder="Type your last name"
-          labelText="Last Name"
-          defaultValue={"hehee"}
-          readOnly
+        <InputCheckbox
+          name="coverImageUrl"
+          labelText="Publish?"
+          type="checkbox"
         />
 
         <div className="mt-6">
