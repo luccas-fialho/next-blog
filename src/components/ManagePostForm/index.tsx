@@ -6,55 +6,83 @@ import InputCheckbox from "../InputCheckbox";
 import MarkdownEditor from "../MarkdownEditor";
 import { useState } from "react";
 import ImageUploader from "../Admin/ImageUploader";
+import { PostModelDTO } from "@/models/post/post-model-DTO";
 
-const ManagePostForm = () => {
-  const [content, setContent] = useState("");
+type ManagePostFormProps = {
+  post?: PostModelDTO;
+};
+
+const ManagePostForm = ({ post }: ManagePostFormProps) => {
+  const [content, setContent] = useState(post?.content || "");
+
   return (
     <form action="" className="mb-16">
       <div className="flex flex-col gap-6">
-        <InputText placeholder="Type your name" labelText="Name" />
-
-        <ImageUploader />
-
-        <InputText placeholder="Type your last name" labelText="Last Name" />
-
-        <InputCheckbox
-          placeholder="Type your last name"
-          labelText="Last Name"
+        <InputText
+          name="id"
+          placeholder="ID generated automatically"
+          labelText="ID"
+          type="text"
+          defaultValue={post?.id || ""}
+          readOnly
         />
 
         <InputText
-          disabled
-          placeholder="Type your last name"
-          labelText="Last Name"
-          defaultValue={"xdxdxds"}
+          name="slug"
+          placeholder="Slug generated automatically"
+          labelText="Slug"
+          type="text"
+          defaultValue={post?.slug || ""}
+          readOnly
+        />
+
+        <InputText
+          name="author"
+          placeholder="Johnny Test"
+          labelText="Author"
+          type="text"
+          defaultValue={post?.author || ""}
+        />
+
+        <InputText
+          name="title"
+          placeholder="My amazing title!"
+          labelText="Title"
+          type="text"
+          defaultValue={post?.title || ""}
+        />
+
+        <InputText
+          name="excerpt"
+          placeholder="This is my amazing post description"
+          labelText="Excerpt"
+          type="text"
+          defaultValue={post?.excerpt || ""}
         />
 
         <MarkdownEditor
           labelText="Content"
-          disabled={false}
-          textAreaName="content"
           value={content}
           setValue={setContent}
+          textAreaName="content"
+          disabled={false}
         />
 
-        <InputText
-          disabled
-          placeholder="Type your last name"
-          labelText="Last Name"
-        />
+        <ImageUploader />
 
         <InputText
-          placeholder="Type your last name"
-          labelText="Last Name"
-          readOnly
+          name="coverImageUrl"
+          placeholder="Type/paste image url"
+          labelText="Cover post image"
+          type="text"
+          defaultValue={post?.coverImageUrl || ""}
         />
 
-        <InputText
-          placeholder="Type your last name"
-          labelText="Last Name"
-          defaultValue={"hehee"}
-          readOnly
+        <InputCheckbox
+          name="coverImageUrl"
+          labelText="Publish?"
+          type="checkbox"
+          defaultChecked={post?.published || false}
         />
 
         <div className="mt-6">

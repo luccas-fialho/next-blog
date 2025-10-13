@@ -1,6 +1,3 @@
-export type PostModelDTO = {
-  title: string;
-  slug: string;
-  createdAt: string;
-  excerpt: string;
-};
+import { PostModel } from "./post-model";
+
+export type PostModelDTO = Omit<PostModel, "updatedAt">;
