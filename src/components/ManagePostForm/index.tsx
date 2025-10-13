@@ -4,9 +4,10 @@ import InputText from "../InputText";
 import Button from "../Button";
 import InputCheckbox from "../InputCheckbox";
 import MarkdownEditor from "../MarkdownEditor";
-import { useState } from "react";
+import { useActionState, useEffect, useState } from "react";
 import ImageUploader from "../Admin/ImageUploader";
 import { PostModelDTO } from "@/models/post/post-model-DTO";
+import { createPostAction } from "@/actions/post/create-post-action";
 
 type ManagePostFormProps = {
   post?: PostModelDTO;
@@ -15,8 +16,21 @@ type ManagePostFormProps = {
 const ManagePostForm = ({ post }: ManagePostFormProps) => {
   const [content, setContent] = useState(post?.content || "");
 
+  const initialState = {
+    number: 0,
+  };
+
+  const [state, action, isPending] = useActionState(
+    createPostAction,
+    initialState
+  );
+
+  useEffect(() => {
+    console.log(state.number);
+  }, [state.number]);
+
   return (
-    <form action="" className="mb-16">
+    <form action={action} className="mb-16">
       <div className="flex flex-col gap-6">
         <InputText
           name="id"

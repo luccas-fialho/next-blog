@@ -1,6 +1,6 @@
 "use client";
 
-import { uploadImageAction } from "@/actions/post/upload-image-action";
+import { uploadImageAction } from "@/actions/upload/upload-image-action";
 import Button from "@/components/Button";
 import { IMAGE_UPLOAD_MAX_SIZE } from "@/lib/constants";
 import { UploadIcon } from "lucide-react";
