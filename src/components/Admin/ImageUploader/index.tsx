@@ -18,6 +18,8 @@ const ImageUploader = () => {
   };
 
   const handleChange = () => {
+    toast.dismiss();
+
     const fileInput = fileInputRef.current;
     const file = fileInput?.files?.[0];
     if (!file) return;
@@ -35,12 +37,18 @@ const ImageUploader = () => {
 
     // TODO: upload the image to the server
     startTransition(async () => {
-      const result = await uploadImageAction();
-      console.log(result);
+      const result = await uploadImageAction(formData);
+
+      if (result.error) {
+        toast.error(result.error);
+        fileInput.value = "";
+        return;
+      }
+
+      toast.success(result.url);
     });
 
     fileInput.value = "";
-    toast.success("Image uploaded successfully (not really, this is a demo)");
   };
 
   return (
