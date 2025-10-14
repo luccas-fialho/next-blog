@@ -95,7 +95,7 @@ const ManagePostForm = ({ post }: ManagePostFormProps) => {
         />
 
         <InputCheckbox
-          name="coverImageUrl"
+          name="published"
           labelText="Publish?"
           type="checkbox"
           defaultChecked={formState.published}
