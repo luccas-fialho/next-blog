@@ -22,7 +22,6 @@ const MenuAdmin = () => {
 
   const navClasses = clsx(
     "bg-slate-900 text-slate-100 rounded-lg",
-    "dark:text-slate-900 dark:bg-slate-100",
     "flex flex-col mb-8",
     "sm:flex-row sm:flex-wrap",
     !isOpen && "h-10",
