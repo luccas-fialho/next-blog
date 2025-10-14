@@ -1,12 +1,12 @@
 import clsx from "clsx";
 import React from "react";
 import PostHeading from "../PostHeading";
-import { PostModelDTO } from "@/models/post/post-model-DTO";
+import { PublicPost } from "@/models/post/post-model-DTO";
 import PostDate from "../PostDate";
 
 type PostSummaryProps = {
   postHeading?: "h1" | "h2";
-  post: PostModelDTO;
+  post: PublicPost;
 };
 
 const PostSummary = ({ post, postHeading }: PostSummaryProps) => {
