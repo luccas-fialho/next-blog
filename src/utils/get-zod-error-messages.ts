@@ -1,11 +1,9 @@
-import { ZodFormattedError } from 'zod';
+import { z } from "zod";
 
-export function getZodErrorMessages<T>(error: ZodFormattedError<T>): string[] {
-  return Object.values(error)
-    .map(field => {
-      if (Array.isArray(field)) return field;
-      return field?._errors || [];
-    })
-    .flat()
-    .filter(Boolean);
+export function getZodErrors(result: ReturnType<z.ZodTypeAny["safeParse"]>): string[] {
+  if (result.success) return [];
+  return result.error.issues.map(issue => {
+    const path = issue.path.join(".");
+    return path ? `${path}: ${issue.message}` : issue.message;
+  });
 }

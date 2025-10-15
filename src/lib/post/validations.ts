@@ -1,4 +1,4 @@
-import { getZodErrorMessages } from "@/utils/get-zod-error-messages";
+import { getZodErrors } from "@/utils/get-zod-error-messages";
 import { isUrlOrRelativePath } from "@/utils/is-url-or-relative-path";
 import sanitizeHtml from "sanitize-html";
 import { z } from "zod";
@@ -70,10 +70,13 @@ const obj = {
     name: "undefined",
     lastModified: 1760463329569,
   },
-  coverImageUrl: "/images/bryen_8.png",
+  coverImageUrl: "",
   published: "on",
 };
 
 const zodParsedObj = PostCreateSchema.safeParse(obj);
 
-console.log(zodParsedObj);
+if (!zodParsedObj.success) {
+  const errors = getZodErrors(zodParsedObj);
+  console.log(errors);
+}
