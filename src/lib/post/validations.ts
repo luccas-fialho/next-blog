@@ -1,4 +1,3 @@
-import { getZodErrors } from "@/utils/get-zod-error-messages";
 import { isUrlOrRelativePath } from "@/utils/is-url-or-relative-path";
 import sanitizeHtml from "sanitize-html";
 import { z } from "zod";
@@ -48,35 +47,3 @@ export const PostCreateSchema = PostBaseSchema;
 export const PostUpdateSchema = PostBaseSchema.extend({
   // id: z.string().uuid('Invalid ID'),
 });
-
-const obj = {
-  $ACTION_REF_1: "",
-  "$ACTION_1:0":
-    '{"id":"7fd4f5986fbb7dc716db50c0841645acf0994e7f4f","bound":"$@1"}',
-  "$ACTION_1:1":
-    '[{"formState":{"id":"99f8add4-7684-4c16-a316-616271db199e","slug":"rotina-matinal-de-pessoas-altamente-eficazes","title":"Rotina matinal de pessoas altamente eficazes","excerpt":"O Next.js também é uma boa escolha para quem quer se preocupar com performance e SEO.","author":"Isabela Nunes","content":"O Next.js também é uma boa escolha para quem quer se preocupar com performance e SEO.","coverImageUrl":"/images/bryen_8.png","createdAt":"2025-04-08T00:24:38.616Z","published":true},"errors":[]}]',
-  $ACTION_KEY: "ke0b291b3048c7831ac76473e268024cf",
-  id: "99f8add4-7684-4c16-a316-616271db199e",
-  slug: "rotina-matinal-de-pessoas-altamente-eficazes",
-  author: "Isabela Nunes",
-  title: "Rotina matinal de pessoas altamente eficazes",
-  excerpt:
-    "O Next.js também é uma boa escolha para quem quer se preocupar com performance e SEO.",
-  content:
-    "O Next.js também é uma boa escolha para quem quer se preocupar com performance e SEO.",
-  file: {
-    size: 0,
-    type: "application/octet-stream",
-    name: "undefined",
-    lastModified: 1760463329569,
-  },
-  coverImageUrl: "",
-  published: "on",
-};
-
-const zodParsedObj = PostCreateSchema.safeParse(obj);
-
-if (!zodParsedObj.success) {
-  const errors = getZodErrors(zodParsedObj);
-  console.log(errors);
-}
