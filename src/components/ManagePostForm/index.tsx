@@ -111,7 +111,9 @@ const ManagePostForm = ({ post }: ManagePostFormProps) => {
         />
 
         <div className="mt-6">
-          <Button type="submit">Submit</Button>
+          <Button type="submit" disabled={isPending}>
+            Submit
+          </Button>
         </div>
       </div>
     </form>
