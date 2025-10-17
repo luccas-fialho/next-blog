@@ -12,12 +12,35 @@ import {
 } from "@/models/post/post-model-DTO";
 import { createPostAction } from "@/actions/post/create-post-action";
 import { toast } from "react-toastify";
+import { updatePostAction } from "@/actions/post/update-post-action";
 
-type ManagePostFormProps = {
-  post?: PublicPost;
+type ManagePostFormUpdateProps = {
+  mode: "update";
+  post: PublicPost;
 };
 
-const ManagePostForm = ({ post }: ManagePostFormProps) => {
+type ManagePostFormCreateProps = {
+  mode: "create";
+};
+
+type ManagePostFormProps =
+  | ManagePostFormUpdateProps
+  | ManagePostFormCreateProps;
+
+const ManagePostForm = (props: ManagePostFormProps) => {
+  const { mode } = props;
+
+  let post;
+
+  if (mode === "update") {
+    post = props.post;
+  }
+
+  const actionsMap = {
+    update: updatePostAction,
+    create: createPostAction,
+  };
+
   const [content, setContent] = useState(post?.content || "");
 
   const initialState = {
@@ -26,17 +49,23 @@ const ManagePostForm = ({ post }: ManagePostFormProps) => {
   };
 
   const [state, action, isPending] = useActionState(
-    createPostAction,
+    actionsMap[mode],
     initialState
   );
 
   useEffect(() => {
     if (state.errors.length > 0) {
-      console.log(state.errors.length);
       toast.dismiss();
       state.errors.forEach((error) => toast.error(error));
     }
   }, [state.errors]);
+
+  useEffect(() => {
+    if (state.success) {
+      toast.dismiss();
+      toast.success("Post updated successfully!");
+    }
+  }, [state.success]);
 
   const { formState } = state;
 
@@ -49,6 +78,7 @@ const ManagePostForm = ({ post }: ManagePostFormProps) => {
           labelText="ID"
           type="text"
           defaultValue={formState.id}
+          disabled={isPending}
           readOnly
         />
 
@@ -58,6 +88,7 @@ const ManagePostForm = ({ post }: ManagePostFormProps) => {
           labelText="Slug"
           type="text"
           defaultValue={formState.slug}
+          disabled={isPending}
           readOnly
         />
 
@@ -67,6 +98,7 @@ const ManagePostForm = ({ post }: ManagePostFormProps) => {
           labelText="Author"
           type="text"
           defaultValue={formState.author}
+          disabled={isPending}
         />
 
         <InputText
@@ -75,6 +107,7 @@ const ManagePostForm = ({ post }: ManagePostFormProps) => {
           labelText="Title"
           type="text"
           defaultValue={formState.title}
+          disabled={isPending}
         />
 
         <InputText
@@ -83,6 +116,7 @@ const ManagePostForm = ({ post }: ManagePostFormProps) => {
           labelText="Excerpt"
           type="text"
           defaultValue={formState.excerpt}
+          disabled={isPending}
         />
 
         <MarkdownEditor
@@ -90,10 +124,10 @@ const ManagePostForm = ({ post }: ManagePostFormProps) => {
           value={content}
           setValue={setContent}
           textAreaName="content"
-          disabled={false}
+          disabled={isPending}
         />
 
-        <ImageUploader />
+        <ImageUploader disabled={isPending}/>
 
         <InputText
           name="coverImageUrl"
@@ -101,6 +135,7 @@ const ManagePostForm = ({ post }: ManagePostFormProps) => {
           labelText="Cover post image"
           type="text"
           defaultValue={formState.coverImageUrl}
+          disabled={isPending}
         />
 
         <InputCheckbox
@@ -108,6 +143,7 @@ const ManagePostForm = ({ post }: ManagePostFormProps) => {
           labelText="Publish?"
           type="checkbox"
           defaultChecked={formState.published}
+          disabled={isPending}
         />
 
         <div className="mt-6">

@@ -22,7 +22,7 @@ const AdminPostIdPage = async ({ params }: AdminPostIdPageProps) => {
   return (
     <div className="flex flex-col gap-6">
       <h1 className="text-xl font-extrabold">Edit post</h1>
-      <ManagePostForm post={post} />
+      <ManagePostForm mode="update" post={post} />
     </div>
   );
 };
