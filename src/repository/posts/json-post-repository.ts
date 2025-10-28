@@ -51,4 +51,16 @@ export class JsonPostRepository implements PostRepository {
 
     return post;
   }
+
+  async create(post: PostModel): Promise<PostModel> {
+    
+  }
+
+  async delete(id: string): Promise<PostModel> {
+    
+  }
+
+  async update(id: string, newPostData: Omit<PostModel, "id" | "slug" | "createdAt" | "updatedAt">): Promise<PostModel> {
+     
+  }
 }

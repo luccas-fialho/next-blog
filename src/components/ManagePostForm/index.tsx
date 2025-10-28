@@ -13,6 +13,7 @@ import {
 import { createPostAction } from "@/actions/post/create-post-action";
 import { toast } from "react-toastify";
 import { updatePostAction } from "@/actions/post/update-post-action";
+import { useRouter, useSearchParams } from "next/navigation";
 
 type ManagePostFormUpdateProps = {
   mode: "update";
@@ -29,6 +30,9 @@ type ManagePostFormProps =
 
 const ManagePostForm = (props: ManagePostFormProps) => {
   const { mode } = props;
+  const searchParams = useSearchParams();
+  const created = searchParams.get("created");
+  const router = useRouter();
 
   let post;
 
@@ -66,6 +70,16 @@ const ManagePostForm = (props: ManagePostFormProps) => {
       toast.success("Post updated successfully!");
     }
   }, [state.success]);
+
+  useEffect(() => {
+    if (created === "1") {
+      toast.dismiss();
+      toast.success("Post created successfully!");
+      const url = new URL(window.location.href);
+      url.searchParams.delete("created");
+      router.replace(url.toString());
+    }
+  }, [created, router]);
 
   const { formState } = state;
 
@@ -127,7 +141,7 @@ const ManagePostForm = (props: ManagePostFormProps) => {
           disabled={isPending}
         />
 
-        <ImageUploader disabled={isPending}/>
+        <ImageUploader disabled={isPending} />
 
         <InputText
           name="coverImageUrl"

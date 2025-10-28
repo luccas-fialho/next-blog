@@ -22,9 +22,8 @@ const InputText = ({ labelText = "", ...props }: InputTextProps) => {
           "ring-3 ring-slate-400 rounded",
           "p-2 transition focus:ring-blue-600",
           "placeholder-slate-300",
-          "disabled:bg-slate-200 disabled:text-slate-400",
+          "disabled:text-slate-400",
           "disabled:placeholder-slate-400",
-          "read-only:bg-slate-100",
           "dark:bg-slate-900",
           props.className
         )}
