@@ -7,7 +7,6 @@ import {
   PublicPost,
 } from "@/models/post/post-model-DTO";
 import { postRepository } from "@/repository/posts";
-import asyncDelay from "@/utils/async-delay";
 import { getZodErrors } from "@/utils/get-zod-error-messages";
 import { makeRandomString } from "@/utils/make-random-string";
 import { revalidateTag } from "next/cache";
@@ -22,8 +21,6 @@ export const updatePostAction = async (
   prevState: UpdatePostActionState,
   formData: FormData
 ): Promise<UpdatePostActionState> => {
-  await asyncDelay(3000);
-
   if (!(formData instanceof FormData)) {
     return {
       formState: prevState.formState,
