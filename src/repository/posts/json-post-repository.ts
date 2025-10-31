@@ -60,7 +60,7 @@ export class JsonPostRepository implements PostRepository {
     const posts = await this.findAll();
 
     if (!post.id || !post.slug) {
-      throw new Error("Post sem ID ou Slug");
+      throw new Error("Post without ID or Slug");
     }
 
     const idOrSlugExist = posts.find(
@@ -68,7 +68,7 @@ export class JsonPostRepository implements PostRepository {
     );
 
     if (idOrSlugExist) {
-      throw new Error("ID ou Slug devem ser únicos");
+      throw new Error("ID and Slug must be unique.");
     }
 
     posts.push(post);
@@ -82,7 +82,7 @@ export class JsonPostRepository implements PostRepository {
     const postIndex = posts.findIndex((p) => p.id === id);
 
     if (postIndex < 0) {
-      throw new Error("Post não existe");
+      throw new Error("Post not found.");
     }
 
     const post = posts[postIndex];
@@ -101,7 +101,7 @@ export class JsonPostRepository implements PostRepository {
     const savedPost = posts[postIndex];
 
     if (postIndex < 0) {
-      throw new Error("Post não existe");
+      throw new Error("Post not found.");
     }
 
     const newPost = {
