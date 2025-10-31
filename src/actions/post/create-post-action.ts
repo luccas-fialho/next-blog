@@ -7,7 +7,6 @@ import {
   PublicPost,
 } from "@/models/post/post-model-DTO";
 import { postRepository } from "@/repository/posts";
-import asyncDelay from "@/utils/async-delay";
 import { getZodErrors } from "@/utils/get-zod-error-messages";
 import { makeSlugFromText } from "@/utils/make-slug-from-text";
 import { revalidateTag } from "next/cache";
@@ -24,8 +23,6 @@ export const createPostAction = async (
   prevState: CreatePostActionState,
   formData: FormData
 ): Promise<CreatePostActionState> => {
-  await asyncDelay(3000);
-
   if (!(formData instanceof FormData)) {
     return {
       formState: prevState.formState,

@@ -110,16 +110,3 @@ export class DrizzlePostRepository implements PostRepository {
     };
   }
 }
-
-// como-a-tecnologia-impacta-nosso-bem-estar false
-// os-desafios-do-trabalho-remoto-moderno true
-// 9eb8b7ac-2b48-4835-880a-a1c798e1a595 true
-// 6b204dab-2312-4525-820a-a0463560835f false
-
-// (async () => {
-//   const repo = new DrizzlePostRepository();
-//   const post = await repo.findById("6b204dab-2312-4525-820a-a0463560835f");
-//   console.log(post);
-
-//   //posts.forEach((post) => console.log(post.id, post.published));
-// })();
