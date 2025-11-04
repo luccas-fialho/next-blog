@@ -2,7 +2,8 @@ import { PostModel } from "@/models/post/post-model";
 import { PostRepository } from "./posts-repository";
 import { resolve } from "path";
 import { readFile, writeFile } from "fs/promises";
-import { LOADING_TIME_IN_MS } from "@/lib/constants";
+
+const LOADING_TIME_IN_MS = Number(process.env.LOADING_TIME_IN_MS) || 0;
 
 const ROOT_DIR = process.cwd();
 const JSON_PATH = resolve(ROOT_DIR, "src", "db", "seed", "posts.json");
