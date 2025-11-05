@@ -1,4 +1,12 @@
 import bcrypt from "bcryptjs";
+import { cookies } from "next/headers";
+
+const jwtSecretKey = process.env.JWT_SECRET_KEY;
+const jwtEncodeKey = new TextEncoder().encode(jwtSecretKey);
+
+const loginExpSeconds = Number(process.env.LOGIN_EXPIRATION_SECONDS) || 86400;
+const loginExpStr = process.env.LOGIN_EXPIRATION_STRING || "1d";
+const loginCookieName = process.env.LOGIN_COOKIE_NAME || "loginSession";
 
 export const hashPassword = async (password: string) => {
   const hash = await bcrypt.hash(password, 10);
@@ -11,10 +19,21 @@ export const verifyPassword = async (password: string, base64Hash: string) => {
   return bcrypt.compare(password, hash);
 };
 
-(async () => {
-  const isPasswordValid = await verifyPassword(
-    "12345",
-    "JDJiJDEwJGNTQVYyT1dWZTIvcWg0blhaM3hNZGVYa1BaOWw0ZC5OdmQwdXRJNG51SDdkNEQuZ1ZnSmF1"
-  );
-  console.log({ isPasswordValid });
-})();
+export const createLoginSession = async (username: string) => {
+  const expiresAt = new Date(Date.now() + loginExpSeconds * 1000);
+  const loginSession = username + "Anything";
+  const cookieStore = await cookies();
+
+  cookieStore.set(loginCookieName, loginSession, {
+    httpOnly: true,
+    secure: true,
+    sameSite: "strict",
+    expires: expiresAt,
+  });
+};
+
+export const deleteLoginSession = async () => {
+  const cookieStore = await cookies();
+  cookieStore.set(loginCookieName, "", { expires: new Date(0) });
+  cookieStore.delete(loginCookieName);
+};

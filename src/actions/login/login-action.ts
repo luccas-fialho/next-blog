@@ -1,7 +1,8 @@
 "use server";
 
-import { verifyPassword } from "@/lib/login/manage-login";
+import { createLoginSession, verifyPassword } from "@/lib/login/manage-login";
 import asyncDelay from "@/utils/async-delay";
+import { redirect } from "next/navigation";
 
 type LoginActionState = {
   username: string;
@@ -37,9 +38,6 @@ export const loginAction = async (
     };
   }
 
-  // Create cookie and redirect to admin page
-  return {
-      username,
-      error: "User logged in successfully",
-    };
+  await createLoginSession(username);
+  redirect("/admin/post");
 };
