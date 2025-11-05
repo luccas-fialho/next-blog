@@ -1,7 +1,9 @@
+import LoginForm from "@/components/Admin/LoginForm";
+
 export const dynamic = "force-dynamic";
 
 const AdminLoginPage = async () => {
-  return <div>AdminLoginPage</div>;
+  return <LoginForm />;
 };
 
 export default AdminLoginPage;
