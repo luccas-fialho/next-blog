@@ -1,5 +1,6 @@
 "use server";
 
+import { verifyLoginSession } from "@/lib/login/manage-login";
 import { PostCreateSchema } from "@/lib/post/validations";
 import { PostModel } from "@/models/post/post-model";
 import {
@@ -23,6 +24,8 @@ export const createPostAction = async (
   prevState: CreatePostActionState,
   formData: FormData
 ): Promise<CreatePostActionState> => {
+  const isAuthenticated = await verifyLoginSession();
+
   if (!(formData instanceof FormData)) {
     return {
       formState: prevState.formState,
@@ -32,6 +35,13 @@ export const createPostAction = async (
 
   const formDataToObj = Object.fromEntries(formData.entries());
   const zodParsedObj = PostCreateSchema.safeParse(formDataToObj);
+
+  if (!isAuthenticated) {
+    return {
+      formState: makePartialPublicPost(formDataToObj),
+      errors: ["You must be logged in to create a post."],
+    };
+  }
 
   if (!zodParsedObj.success) {
     const errors = getZodErrors(zodParsedObj);

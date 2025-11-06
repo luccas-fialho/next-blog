@@ -1,5 +1,6 @@
 "use server";
 
+import { verifyLoginSession } from "@/lib/login/manage-login";
 import { PostUpdateSchema } from "@/lib/post/validations";
 import {
   makePartialPublicPost,
@@ -21,6 +22,8 @@ export const updatePostAction = async (
   prevState: UpdatePostActionState,
   formData: FormData
 ): Promise<UpdatePostActionState> => {
+  const isAuthenticated = await verifyLoginSession();
+
   if (!(formData instanceof FormData)) {
     return {
       formState: prevState.formState,
@@ -39,6 +42,13 @@ export const updatePostAction = async (
 
   const formDataToObj = Object.fromEntries(formData.entries());
   const zodParsedObj = PostUpdateSchema.safeParse(formDataToObj);
+
+  if (!isAuthenticated) {
+    return {
+      formState: makePartialPublicPost(formDataToObj),
+      errors: ["You must be logged in to update a post. Try logging in again in another tab."],
+    }
+  }
 
   if (!zodParsedObj.success) {
     const errors = getZodErrors(zodParsedObj);

@@ -1,5 +1,6 @@
 "use server";
 
+import { verifyLoginSession } from "@/lib/login/manage-login";
 import { mkdir, writeFile } from "fs/promises";
 import { extname, resolve } from "path";
 
@@ -14,6 +15,12 @@ export const uploadImageAction = async (
   const makeResult = ({ url = "", error = "" }) => {
     return { url, error };
   };
+
+  const isAuthenticated = await verifyLoginSession();
+
+  if (!isAuthenticated) {
+    return makeResult({ error: "You must be logged in to upload an image." });
+  }
 
   if (!(formData instanceof FormData)) {
     return makeResult({ error: "Invalid data." });
