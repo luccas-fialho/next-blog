@@ -5,16 +5,20 @@ import Link from "next/link";
 import {
   CircleXIcon,
   FileTextIcon,
+  HourglassIcon,
   HouseIcon,
+  LogOutIcon,
   MenuIcon,
   PlusIcon,
 } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useTransition } from "react";
 import { usePathname } from "next/navigation";
+import { logoutAction } from "@/actions/login/logout-action";
 
 const MenuAdmin = () => {
   const [isOpen, setIsOpen] = useState(false);
   const pathName = usePathname();
+  const [isPending, startTransition] = useTransition();
 
   useEffect(() => {
     setIsOpen(false);
@@ -44,6 +48,13 @@ const MenuAdmin = () => {
     "dark:text-blue-700",
     "sm:hidden"
   );
+
+  const handleLogout = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
+    e.preventDefault();
+    startTransition(async () => {
+      await logoutAction();
+    });
+  };
 
   return (
     <nav className={navClasses}>
@@ -89,6 +100,22 @@ const MenuAdmin = () => {
         <PlusIcon />
         Create Post
       </Link>
+
+      <a onClick={handleLogout} href="#" className={linkClasses}>
+        {isPending && (
+          <>
+            <HourglassIcon />
+            Wait...
+          </>
+        )}
+
+        {!isPending && (
+          <>
+            <LogOutIcon />
+            Logout
+          </>
+        )}
+      </a>
     </nav>
   );
 };
